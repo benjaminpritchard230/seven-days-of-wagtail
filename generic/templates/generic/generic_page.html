@@ -13,5 +13,8 @@
     <img src="{{img.url}}" alt="{{img.alt}}">
     <h3>{{page.banner_title}}</h3>
     <p>{{page.introduction}}</p>
+    {% image page.author.image fill-100x100  %}
+    {% comment %} <img src=""> {% endcomment %}
+    <h5>Page created by {{page.author.name}} from {{page.author.company_name}}</h5>
 
 {% endblock content %}

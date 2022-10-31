@@ -3,10 +3,13 @@ from unicodedata import name
 from django.db import models
 
 from wagtail.models import Page
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.core.fields import StreamField
+from wagtail.core import blocks
+from wagtail.images.blocks import ImageChooserBlock
 
 
 class GenericPage(Page):
@@ -18,6 +21,7 @@ class GenericPage(Page):
         FieldPanel("introduction"),
         FieldPanel("banner_image"),
         SnippetChooserPanel("author"),
+        StreamFieldPanel("body"),
 
     ]
     introduction = models.TextField(blank=True)
@@ -35,6 +39,13 @@ class GenericPage(Page):
         on_delete=models.SET_NULL,
         related_name='+',
     )
+    body = StreamField([
+        # ('name', blocks.SomethingBlock()),
+        ('heading', blocks.CharBlock(template="heading_block.html")),
+        ('image', ImageChooserBlock()),
+        ('paragraph', blocks.RichTextBlock())
+
+    ], null=True)
 
 
 @register_snippet

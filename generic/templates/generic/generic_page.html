@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailimages_tags %}
+{% load static wagtailimages_tags wagtailcore_tags %}
 
 {% block body_class %}template-homepage{% endblock %}
 
@@ -16,5 +16,6 @@
     {% image page.author.image fill-100x100  %}
     {% comment %} <img src=""> {% endcomment %}
     <h5>Page created by {{page.author.name}} from {{page.author.company_name}}</h5>
-
+    <hr>
+    {% include_block page.body %}
 {% endblock content %}

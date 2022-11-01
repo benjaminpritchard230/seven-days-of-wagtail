@@ -40,5 +40,10 @@
         {% block extra_js %}
         {# Override this in templates to add extra javascript #}
         {% endblock %}
+        <footer>
+            {% if settings.site_settings.SocialMediaSettings.instagram %}
+                {{settings.site_settings.SocialMediaSettings.instagram}}
+            {% endif %}
+        </footer>
     </body>
 </html>
